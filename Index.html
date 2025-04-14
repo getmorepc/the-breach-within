@@ -189,10 +189,8 @@
         slashSound.currentTime = 0;
         slashSound.play();
 
-        const canvasLeft = canvas.getBoundingClientRect().left + window.scrollX;
-        const canvasTop = canvas.getBoundingClientRect().top + window.scrollY;
-        slashEffect.style.left = `${canvasLeft + hackerX + 64 - 50}px`;
-        slashEffect.style.top = `${canvasTop + hackerY + 64 - 50}px`;
+        slashEffect.style.left = `${e.pageX - 50}px`;
+        slashEffect.style.top = `${e.pageY - 50}px`;
         slashEffect.style.display = 'block';
 
         setTimeout(() => {
