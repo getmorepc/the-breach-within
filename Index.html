@@ -145,18 +145,16 @@
     let respawnInterval = null;
 
     function getRandomPosition() {
-      const maxX = background.width - 128;
-      const maxY = background.height - 128;
-      hackerX = 64 + Math.random() * (maxX - 128);
-      hackerY = 64 + Math.random() * (maxY - 128);
+      const maxX = canvas.width - 128;
+      const maxY = canvas.height - 128;
+      hackerX = Math.random() * maxX;
+      hackerY = Math.random() * maxY;
     }
 
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      window.bgX = (canvas.width - background.width) / 2;
-      window.bgY = (canvas.height - background.height) / 2;
-      ctx.drawImage(background, bgX, bgY);
-      ctx.drawImage(hacker, bgX + hackerX, bgY + hackerY, 128, 128);
+      ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+      ctx.drawImage(hacker, hackerX, hackerY, 128, 128);
     }
 
     function startMovingHacker() {
@@ -166,8 +164,8 @@
         hackerX += (Math.random() - 0.5) * movementRange;
         hackerY += (Math.random() - 0.5) * movementRange;
 
-        const maxX = background.width - 128;
-        const maxY = background.height - 128;
+        const maxX = canvas.width - 128;
+        const maxY = canvas.height - 128;
         hackerX = Math.max(0, Math.min(maxX, hackerX));
         hackerY = Math.max(0, Math.min(maxY, hackerY));
 
@@ -183,8 +181,8 @@
       const mouseY = (e.clientY - rect.top) * scaleY;
 
       if (
-        mouseX >= bgX + hackerX && mouseX <= bgX + hackerX + 128 &&
-        mouseY >= bgY + hackerY && mouseY <= bgY + hackerY + 128
+        mouseX >= hackerX && mouseX <= hackerX + 128 &&
+        mouseY >= hackerY && mouseY <= hackerY + 128
       ) {
         const points = 1 + Math.floor(difficultyLevel / 2);
         score += points;
@@ -193,8 +191,8 @@
         slashSound.currentTime = 0;
         slashSound.play();
 
-        slashEffect.style.left = `${canvas.offsetLeft + bgX + hackerX + 64 - 50}px`;
-        slashEffect.style.top = `${canvas.offsetTop + bgY + hackerY + 64 - 50}px`;
+        slashEffect.style.left = `${canvas.offsetLeft + hackerX + 64 - 50}px`;
+        slashEffect.style.top = `${canvas.offsetTop + hackerY + 64 - 50}px`;
         slashEffect.style.display = 'block';
 
         setTimeout(() => {
