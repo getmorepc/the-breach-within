@@ -191,8 +191,10 @@
         slashSound.currentTime = 0;
         slashSound.play();
 
-        slashEffect.style.left = `${canvas.offsetLeft + hackerX + 64 - 50}px`;
-        slashEffect.style.top = `${canvas.offsetTop + hackerY + 64 - 50}px`;
+        const canvasLeft = canvas.getBoundingClientRect().left + window.scrollX;
+        const canvasTop = canvas.getBoundingClientRect().top + window.scrollY;
+        slashEffect.style.left = `${canvasLeft + hackerX + 64 - 50}px`;
+        slashEffect.style.top = `${canvasTop + hackerY + 64 - 50}px`;
         slashEffect.style.display = 'block';
 
         setTimeout(() => {
