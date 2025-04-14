@@ -177,8 +177,10 @@
 
     canvas.addEventListener('click', function (e) {
       const rect = canvas.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left;
-      const mouseY = e.clientY - rect.top;
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      const mouseX = (e.clientX - rect.left) * scaleX;
+      const mouseY = (e.clientY - rect.top) * scaleY;
 
       if (
         mouseX >= bgX + hackerX && mouseX <= bgX + hackerX + 128 &&
